@@ -1,0 +1,38 @@
+<!DOCTYPE html> <!--documento xml definito a tag-->
+<html lang="en"> <!-- tag di apertura-->
+<head> <!-- primo blocco principale, contiene informazioni meta e il titolo della pagina -->
+    <!--in head ho cose che non compaiono nella pagina ma che servono al browser per capire come visualizzarla-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principale</title>  <!-- titolo della pagina che appare nella scheda del browser, non sulla pagina -->
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* tipo di carattere */
+            margin: 20px; /* margine intorno al corpo della pagina */
+            background-color: #f0f0f0; /* colore di sfondo della pagina */
+        }
+        h1 {
+            color: cyan; /* colore del testo del titolo */
+        }
+        #paragrafo { /* selettore per l'elemento con id "paragrafo" */
+            color: #666; /* colore del testo del paragrafo */
+            font-size: 20px; /* dimensione del testo del paragrafo */
+        }
+        .sfondo-colorato { /* selettore per gli elementi con classe "sfondo-colorato" */
+            background-color: yellow; /* colore di sfondo del paragrafo */
+            padding: 10px; /* spazio interno intorno al testo */
+        }
+    </style>
+
+    
+</head>
+<body> <!-- secondo blocco principale, contiene il contenuto vero e proprio della pagina -->
+   <!-- con i tag descrivo cosa voglio vedere nella pagina-->
+    <h1 class= "sfondo-colorato">Ciao, benvenuto nella mia pagina web!</h1> <!-- titolo principale della pagina, h1 max grandezza -->
+    <p id="paragrafo">Questa è una semplice pagina HTML.</p> <!-- paragrafo di testo -->
+    <!-- id è un attributo che identifica in modo univoco un elemento nella pagina, poi in js posso usarlo per selezionare questo elemento -->
+    <!--  lo stile viene definito in linguaggio css (nn c'è indentazione in css), può essere incluso qui (nell head)o in un file separato -->
+    <p class = "sfondo-colorato">Questo è un paragrafo con sfondo colorato.</p>
+    <!-- class è un attributo che identifica un gruppo di elementi nella pagina, poi in js posso usarlo per selezionare tutti gli elementi con quella classe -->
+</body>
+</html> <!-- tag di chiusura-->

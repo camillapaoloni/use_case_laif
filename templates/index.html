@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linneus Classifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="text-center mt-5" style="font-size: 60px;">Linneus Classifier</h1>
+    <!-- per usare uno stile differente da quello di bootstrap possiamo definire le nostre classi personalizzate nel file CSS usando style="..." -->
+    <form class="container"> 
+    <!-- container è una classe di Bootstrap che applica un padding orizzontale e centra il contenuto -->
+    <!--form è un elemento HTML che definisce un'area in cui l'utente può inserire dati -->
+    <p class="fw-bold">Species available in the database: {{ n_species }}</p> 
+    <!-- n_species è una variabile passata dal server Flask al template HTML, rappresenta il numero di specie disponibili nel database -->
+    <div class="mb-3">
+    <label for="input-species" class="form-label">Species</label>
+    <!-- for serve per attivare la label corrispondente quando clicchi l'input-->
+    <input type="text" class="form-control" id="input-species">
+  </div>
+  <button  id="button-submit" type="submit" class="btn btn-primary">Submit</button>
+  <!-- comportamento predefinito di button è quello di ricaricare la pagina web-->
+  <!--in Javascript andremo poi a impedire il comportamento predefinito del form-->
+  <!-- le classi di button sono di Bootstrap e forniscono stili predefiniti per i pulsanti -->
+  <p id="result" class="mt-3"></p>
+</form>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<!-- url_for è una funzione di Flask che trova nella cartella static il file script.js -->
+<!-- questo viene interpretato dal server Flask e restituito al client, permettendo di includere il file JavaScript nella pagina HTML -->
+</body>
+</html>

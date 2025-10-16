@@ -1,0 +1,24 @@
+<!DOCTYPE html> <!--documento xml definito a tag-->
+<html lang="en"> <!-- tag di apertura-->
+<head> <!-- primo blocco principale, contiene informazioni meta e il titolo della pagina -->
+    <!--in head ho cose che non compaiono nella pagina ma che servono al browser per capire come visualizzarla-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principale</title>  <!-- titolo della pagina che appare nella scheda del browser, non sulla pagina -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- link della pagina web di bootstrap, contiene un file css che contiene regole e istruzioni che vengono applicate al nostro html-->
+</head>
+<body> <!-- secondo blocco principale, contiene il contenuto vero e proprio della pagina -->
+   <!-- con i tag descrivo cosa voglio vedere nella pagina-->
+    <h1 class= "sfondo-colorato mt-5 text-primary" >Ciao, benvenuto nella mia pagina web!</h1> <!-- titolo principale della pagina, h1 max grandezza -->
+    <!-- h1 appartiene anche alla classe mt-5, definita in bootstrap come margin-top -->
+    <!-- con ms definisco margine sx e con me definisco margine dx -->
+    <div class="bg-success"> <!-- div è un contenitore generico, usato per raggruppare altri elementi -->
+    <p id="paragrafo">Questa è una semplice pagina HTML.</p> <!-- paragrafo di testo -->
+    <!-- id è un attributo che identifica in modo univoco un elemento nella pagina, poi in js posso usarlo per selezionare questo elemento -->
+    <!--  lo stile viene definito in linguaggio css (nn c'è indentazione in css), può essere incluso qui (nell head)o in un file separato -->
+    <p class = "sfondo-colorato">Questo è un paragrafo con sfondo colorato.</p>
+    <!-- class è un attributo che identifica un gruppo di elementi nella pagina, poi in js posso usarlo per selezionare tutti gli elementi con quella classe -->
+    </div>
+</body>
+</html> <!-- tag di chiusura-->
