@@ -37,6 +37,11 @@ def get_species():
     #ora creo la risposta che arrival all'utente
     return jsonify({"entries": [dict(row) for row in results]}) #restituisce i risultati come JSON
 
+@app.route("/add_form") #pagina per aggiungere una nuova specie
+def add_form():
+    return render_template("add_form.html") #restituisce il file HTML chiamato add_form.html che ancora non esiste
+
+
 if __name__ == '__main__': #se questo file viene eseguito direttamente
     if not os.path.exists('db/database.db'): #se il database non esiste
         with app.app_context(): #crea un contesto dell'app Flask per poter accedere alle risorse dell'app

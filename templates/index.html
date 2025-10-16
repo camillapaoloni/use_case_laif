@@ -23,8 +23,9 @@
   <!-- comportamento predefinito di button è quello di ricaricare la pagina web-->
   <!--in Javascript andremo poi a impedire il comportamento predefinito del form-->
   <!-- le classi di button sono di Bootstrap e forniscono stili predefiniti per i pulsanti -->
-  <p id="result" class="mt-3"></p>
+  <p id="result" class="ms-3"></p>
 </form>
+<a href="/add_form" class="ms-5">Go to the add species form</a>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 <!-- url_for è una funzione di Flask che trova nella cartella static il file script.js -->
 <!-- questo viene interpretato dal server Flask e restituito al client, permettendo di includere il file JavaScript nella pagina HTML -->
