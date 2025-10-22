@@ -23,6 +23,7 @@ def index():   #questa funzione risponde alla route principale
 
     return render_template('index.html', n_species=len(results)) #restituisce il file HTML chiamato index.html 
 #il file html viene cercato nella cartella templates se non si specifica un percorso diverso
+
 @app.route('/api/get_species', methods=['POST']) #definizione della route /api/data
 #get specifica che questa route risponde solo alle richieste POST
 #POST è un metodo HTTP usato per inviare dati al server, ad esempio tramite un form o dati aggiuntivi per identificare la richiesta esatta
