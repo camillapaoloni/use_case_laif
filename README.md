@@ -26,7 +26,7 @@ Built using **Python (Flask)**, **Bootstrap 5**, and a lightweight **SQLite** ba
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<tuo_username>/linneus-classifier.git
+git clone https://github.com/camillapaoloni/use_case_laif.git
 cd linneus-classifier
 
 # 2. Build the Docker image
