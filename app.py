@@ -2,6 +2,41 @@ from flask import Flask, jsonify, render_template, request
 import sqlite3
 import os
 
+def normalize_species_data(data):
+    """Corregge maiuscole/minuscole secondo convenzione tassonomica"""
+    def capitalize_first(word):
+        return word.capitalize() if word else ""
+
+    normalized = {
+        'domain': capitalize_first(data.get('domain')),
+        'kingdom': capitalize_first(data.get('kingdom')),
+        'phylum': capitalize_first(data.get('phylum')),
+        'class': capitalize_first(data.get('class')),
+        'order_name': capitalize_first(data.get('order_name')),
+        'family': capitalize_first(data.get('family')),
+        'genus': capitalize_first(data.get('genus')),
+        'species': data.get('species', '').lower(),
+        'subspecies': data.get('subspecies', '').lower(),
+        'common_name': capitalize_first(data.get('common_name')),
+        'author': data.get('author', ''),
+        'year_described': data.get('year_described', ''),
+        'conservation_status': data.get('conservation_status', ''),
+        'distribution': data.get('distribution', ''),
+        'notes': data.get('notes', '')
+    }
+
+    # Crea il nome scientifico completo (Genus species [subspecies])
+    genus = normalized['genus']
+    species = normalized['species']
+    subspecies = normalized['subspecies']
+
+    normalized['scientific_name'] = f"{genus} {species}".strip()
+    if subspecies:
+        normalized['scientific_name'] += f" {subspecies}"
+
+    return normalized
+
+
 def get_db(): #per interagire con il database
     conn = sqlite3.connect('db/database.db') #connessione al database SQLite chiamato database.db dentro la cartella db
     conn.row_factory = sqlite3.Row #per restituire i risultati delle query come dizionari invece che come tuple
@@ -34,13 +69,19 @@ def get_species():
     data= request.get_json() #ottiene i dati JSON inviati nella richiesta POST
     specie = data['species'] #estrae il valore associato alla chiave 'species' dai dati JSON
     db = get_db() #ottiene la connessione al database
-    results = db.execute("SELECT * FROM species WHERE species = (?)", (specie,)).fetchall() #esegue una query SQL per selezionare tutte le righe dalla tabella species e memorizza i risultati
+    results = db.execute("""
+    SELECT * FROM species
+    WHERE LOWER(species) = LOWER(?)
+       OR LOWER(scientific_name) = LOWER(?)
+       OR LOWER(common_name) = LOWER(?)
+""", (specie, specie, specie)).fetchall() #esegue una query SQL per selezionare tutte le righe dalla tabella species e memorizza i risultati
     #ora creo la risposta che arrival all'utente
     return jsonify({"entries": [dict(row) for row in results]}) #restituisce i risultati come JSON
 
 @app.route('/api/add_species', methods=['POST'])#POST perchè sto creando una nuova risorsa
 def add_species():
     data = request.get_json()
+    data = normalize_species_data(data)
 
     # Campi obbligatori
     required_fields = ['domain', 'genus', 'species', 'scientific_name', 'common_name']
