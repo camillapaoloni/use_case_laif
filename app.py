@@ -21,7 +21,7 @@ def index():   #questa funzione risponde alla route principale
     db = get_db() #ottiene la connessione al database
     results = db.execute("SELECT * FROM species").fetchall()
 
-    return render_template('index.html', n_species=len(results)) #restituisce il file HTML chiamato index.html che ancora non esiste
+    return render_template('index.html', n_species=len(results)) #restituisce il file HTML chiamato index.html 
 #il file html viene cercato nella cartella templates se non si specifica un percorso diverso
 @app.route('/api/get_species', methods=['POST']) #definizione della route /api/data
 #get specifica che questa route risponde solo alle richieste POST
@@ -36,6 +36,44 @@ def get_species():
     results = db.execute("SELECT * FROM species WHERE species = (?)", (specie,)).fetchall() #esegue una query SQL per selezionare tutte le righe dalla tabella species e memorizza i risultati
     #ora creo la risposta che arrival all'utente
     return jsonify({"entries": [dict(row) for row in results]}) #restituisce i risultati come JSON
+
+@app.route('/api/add_species', methods=['POST'])#POST perchè sto creando una nuova risorsa
+def add_species():
+    data = request.get_json()
+
+    # Campi obbligatori
+    required_fields = ['domain', 'genus', 'species', 'scientific_name', 'common_name']
+    for field in required_fields:
+        if not data.get(field) or not data[field].strip():
+            return jsonify({"message": f"Campo '{field}' mancante o vuoto"}), 400
+
+    db = get_db()
+    try:
+        db.execute("""
+            INSERT INTO species (
+                domain, kingdom, phylum, class, order_name,
+                family, genus, species, subspecies, scientific_name,
+                common_name, author, year_described, conservation_status,
+                distribution, notes
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            data.get('domain'), data.get('kingdom'), data.get('phylum'),
+            data.get('class'), data.get('order_name'), data.get('family'),
+            data.get('genus'), data.get('species'), data.get('subspecies'),
+            data.get('scientific_name'), data.get('common_name'),
+            data.get('author'), data.get('year_described'),
+            data.get('conservation_status'), data.get('distribution'),
+            data.get('notes')
+        ))
+        db.commit()
+        return jsonify({"message": "Specie aggiunta con successo!"}), 200
+
+    except sqlite3.IntegrityError:
+        return jsonify({"message": "❌ Nome scientifico già presente nel database."}), 400
+
+    except Exception as e:
+        return jsonify({"message": f"Errore del server: {str(e)}"}), 500
 
 @app.route("/add_form") #pagina per aggiungere una nuova specie
 def add_form():

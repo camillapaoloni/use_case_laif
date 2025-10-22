@@ -1,16 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aggiungi una nuova specie</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo di aggiunta specie</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    /* 🌿 Colori personalizzati */
+    :root {
+      --bs-primary: #2b7a0b;
+      --bs-success: #2b7a0b;
+    }
+
+    /* 🌱 Sfondo e layout */
+    body {
+      background: linear-gradient(135deg, #eaf4ea, #f8fdf8);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-card {
+      background-color: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 850px;
+    }
+
+    /* 🎨 Campi e form */
+    .form-control {
+      border-radius: 0.6rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 5px rgba(43, 122, 11, 0.4);
+      border-color: #2b7a0b;
+    }
+
+    h1 {
+      color: var(--bs-primary);
+      font-weight: 700;
+    }
+
+    h4 {
+      color: #4e4e4e;
+      border-bottom: 2px solid #e1e1e1;
+      padding-bottom: 0.4rem;
+    }
+
+    /* 💬 Messaggi */
+    #message {
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    #message.success {
+      color: #2b7a0b;
+    }
+    #message.error {
+      color: #c0392b;
+    }
+
+    /* ✨ Bottone */
+    button[type="submit"] {
+      background-color: var(--bs-success);
+      border: none;
+      transition: 0.2s ease-in-out;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #256f09;
+      transform: translateY(-2px);
+    }
+
+    a {
+      text-decoration: none;
+      color: #2b7a0b;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
-    <h1 class="text-center">Aggiungi una nuova specie</h1>
+  <div class="main-card">
+    <h1 class="text-center mb-3">Aggiungi una nuova specie</h1>
+    <p class="text-center text-muted mb-4">
+      Inserisci i dati tassonomici e le informazioni principali sulla nuova specie.
+    </p>
 
-<a href="/"   class = "mt-3">Go back to the main page</a>
+    <form id="add-species-form" class="border-0">
+      <h4 class="mb-3">Campi obbligatori</h4>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Dominio *</label>
+          <input type="text" id="domain" class="form-control" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Genere *</label>
+          <input type="text" id="genus" class="form-control" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Specie *</label>
+          <input type="text" id="species" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nome scientifico *</label>
+          <input type="text" id="scientific_name" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nome comune *</label>
+          <input type="text" id="common_name" class="form-control" required>
+        </div>
+      </div>
+
+      <h4 class="mt-4 mb-3">Campi opzionali</h4>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Regno</label>
+          <input type="text" id="kingdom" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Phylum</label>
+          <input type="text" id="phylum" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Classe</label>
+          <input type="text" id="class" class="form-control">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Ordine</label>
+          <input type="text" id="order_name" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Famiglia</label>
+          <input type="text" id="family" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Sottospecie</label>
+          <input type="text" id="subspecies" class="form-control">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Autore</label>
+          <input type="text" id="author" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Anno di descrizione</label>
+          <input type="number" id="year_described" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Stato di conservazione (IUCN)</label>
+          <input type="text" id="conservation_status" class="form-control">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Distribuzione geografica</label>
+        <textarea id="distribution" class="form-control" rows="2"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Note</label>
+        <textarea id="notes" class="form-control" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success btn-lg w-100 mt-3 shadow-sm">
+        <i class="bi bi-plus-circle me-2"></i>Aggiungi specie
+      </button>
+    </form>
+
+    <p id="message" class="mt-3 fw-bold"></p>
+
+    <div class="text-center mt-4">
+      <a href="/" class="fw-semibold"><i class="bi bi-arrow-left"></i> Torna alla pagina principale</a>
+    </div>
+  </div>
+
+  <script src="/static/add_form.js"></script>
 </body>
-
 </html>
